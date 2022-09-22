@@ -1,46 +1,43 @@
-
 // SPDX-License-Identifier: MIT
 
-pragma solidity ^0.8.13;
+//Hands on Task 2: To Do List
 
-contract Todos {
+pragma solidity 0.8.13; // solidity version is declared.
+
+contract ToDoApp { // contract creation.
     struct Todo {
-        string text;
-        bool completed;
+        string toDoContent; // this attribute is created to store the content of the every "to do".
+        bool isCompleted; // this is a boolean to check if a task is completed or not.
     }
 
-    Todo[] public todos;
 
+    Todo[] public allTasks; // Todo[] is an array of to-do tasks.
+
+
+    // function where we can create new tasks.
     function create(string calldata _text) public {
+        
+        Todo memory task; // a new todo with type Todo is created
+        task.toDoContent = _text; // default isCompleted value is false already.
 
-        todos.push(Todo(_text, false));
-
-
-        todos.push(Todo({text: _text, completed: false}));
-
-
-        Todo memory todo;
-        todo.text = _text;
-
-
-        todos.push(todo);
+        allTasks.push(task); // the new Todo element is added to the array of Todos.
     }
 
-
-    function get(uint _index) public view returns (string memory text, bool completed) {
-        Todo storage todo = todos[_index];
-        return (todo.text, todo.completed);
+    // basic getter function.
+    function getTask(uint _index) public view returns (string memory toDoContent, bool isCompleted) { 
+        Todo storage todo = allTasks[_index];
+        return (todo.toDoContent, todo.isCompleted); //returns the attributes of a task.
     }
 
-
+    // function that updates text
     function updateText(uint _index, string calldata _text) public {
-        Todo storage todo = todos[_index];
-        todo.text = _text;
+        Todo storage todo = allTasks[_index]; //select a task
+        todo.toDoContent = _text; // assign new content to the selected task.
     }
 
-  
+    // toggles if completed or not.
     function toggleCompleted(uint _index) public {
-        Todo storage todo = todos[_index];
-        todo.completed = !todo.completed;
+        Todo storage todo = allTasks[_index];
+        todo.isCompleted = !todo.isCompleted; // switches the value of "isCompleted".
     }
 }
