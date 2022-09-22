@@ -1,6 +1,5 @@
 // SPDX-License-Identifier: MIT
-
-//Hands on Task 2: To Do List
+// Hands on Task 2: To Do List
 
 pragma solidity 0.8.13; // solidity version is declared.
 
